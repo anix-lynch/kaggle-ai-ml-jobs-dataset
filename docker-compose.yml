@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  job-scraper:
+    build: .
+    container_name: kaggle-job-scraper
+    volumes:
+      # Mount data folder to persist scraped data
+      - ./data:/app/data
+      # Mount scrapers for live editing in Cursor
+      - ./scrapers:/app/scrapers
+    environment:
+      - PYTHONPATH=/app
+      - PYTHONUNBUFFERED=1
+    working_dir: /app
+    stdin_open: true
+    tty: true
